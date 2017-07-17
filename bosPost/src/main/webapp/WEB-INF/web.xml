@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="schedule-console" version="3.0">
+	<display-name>bosPost</display-name>
+<!-- 加载spring的对象创建者，applicationContext对象加载仅加载一次，服务器启动时加载，使用web中的监听器机制 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!--加载spring的配置文件 加载的位置为指定位置 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring/spring*.xml</param-value>
+	</context-param>
+	<!-- 处理请求与相应的字符集编码问题 -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+		<!-- response也设定字符集编码为指定编码集 -->
+			<param-name>ForceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+<!-- springmvc的前端控制器 请求经过web容器，再转到springmvc前端控制器处理 -->
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 加载springmvc的xml配置文件 注意：如果不加此配置，springmvc默认加载/WEB-INF/[DispatcherServlet 
+			的Servlet 名字]-servlet.xml 即：/WEB-INF/springmvc-serlvet.xml 在struts中配置文件有个默认加载，跟这个一样，所以struts的配置文件名 
+			必须是 struts.xml -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:springmvc/springmvc.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<!-- *.action或*.do等等，只要以.action或.do等结尾 的url由于springmvc / 所有的请求都有springmvc解析，针对静态资源的请求（html，css,js）也由springmvc解析是不对的， 
+			所以需要对静态资源的请求不能由springmvc解析 /* 此种配置方式是不对的，如果使用此种方式，当请求要转到到jsp页面，springmvc会去解析jsp页面路径地址，无法解析成功的。 
+			只支持前两种。 -->
+<!-- 以front开头的为映射controller的 -->
+		<url-pattern>/front/*</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
