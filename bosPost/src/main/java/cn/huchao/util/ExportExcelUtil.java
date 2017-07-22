@@ -28,11 +28,10 @@ import jxl.write.biff.RowsExceededException;
 
 /**
  * 
- * 2017年7月4日  huchao
- *	@description
- *导出为Excel文件的工具类
- * ，暂时还没有测试正确与否，这个是用浏览器下载的Excel，需要注意当文件名为中文的时候，考虑
- * 乱码问题，和IE，火狐，等
+ * 2017年7月4日 huchao
+ * 
+ * @description 导出为Excel文件的工具类 ，暂时还没有测试正确与否，这个是用浏览器下载的Excel，需要注意当文件名为中文的时候，考虑
+ *              乱码问题，和IE，火狐，等
  */
 public class ExportExcelUtil {
 	private static final Logger logger = LoggerFactory.getLogger(ExportExcelUtil.class);
@@ -147,11 +146,11 @@ public class ExportExcelUtil {
 		return row;
 	}
 
-/**
- * 标题格式
- *  2017年7月4日  huchao
- * @return
- */
+	/**
+	 * 标题格式 2017年7月4日 huchao
+	 * 
+	 * @return
+	 */
 	private static WritableCellFormat getFormat() {
 		/*
 		 * WritableFont.createFont("宋体")：设置字体为宋体 10：设置字体大小
@@ -176,23 +175,36 @@ public class ExportExcelUtil {
 	}
 
 	/**
-	 * 导出下载为Excel
-	 *  2017年7月4日  huchao
+	 * @description
+	 *	导出下载为Excel，文件名默认为 2017年7月4日 huchao
 	 * @param response
-	 * @param orderList
-	 * @param titleNames
-	 * @param keysName
-	 * @param reportName
+	 * @param orderList		原生数据，需要是List<Map<String, Object>>格式
+	 * @param titleNames	列名称
+	 * @param keysName  列名称在原生数据中对应的变量名
+	 * @param reportName  页标题
+	 * @param fileName		文件名
 	 */
 	public static void exportData(HttpServletResponse response, List<Map<String, Object>> orderList,
-			String[] titleNames, String[] keysName, String reportName) {
+			String[] titleNames, String[] keysName, String reportName, String fileName) {
+		//需要判断浏览器，以支持中文文件名
+		/*String agent = request.getHeader("USER-AGENT").toLowerCase();
+		response.setContentType("application/vnd.ms-excel");
+		String fileName = excelname;
+		String codedFileName = java.net.URLEncoder.encode(fileName, "UTF-8");
+		if (agent.contains("firefox")) {
+			response.setCharacterEncoding("utf-8");
+			response.setHeader("content-disposition", "attachment;filename=" + new String(fileName.getBytes(), "ISO8859-1") + ".xls");
+		} else {
+			response.setHeader("content-disposition", "attachment;filename=" + codedFileName + ".xls");
+		}*/
 		// 将结果转换成Excel文件
 		// 文件名为时间戳
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date date = new Date();
-		String fileName = dateFormat.format(date) + ".xls";
+		//String fileNameAbo = dateFormat.format(date) + ".xls";
+		String fileNameAbo = fileName + ".xls";// 文件全名称
 		response.setContentType("application/vnd.ms-excel;charset=UTF-8");
-		response.setHeader("Content-Disposition", "attachment; filename=" + response.encodeURL(fileName));
+		response.setHeader("Content-Disposition", "attachment; filename=" + response.encodeURL(fileNameAbo));
 		// 转成Excel下载
 		try {
 			OutputStream outputStream = response.getOutputStream();
