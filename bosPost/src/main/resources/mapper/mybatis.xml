@@ -17,6 +17,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  -->
  <!-- 配置映射文件 -->
 	<mappers>
-		<!-- <mapper resource="orm/order/RefundOrderMapper.xml"/> -->
+		<mapper resource="mapper/testMapper.xml"/>
 	</mappers>
 </configuration>

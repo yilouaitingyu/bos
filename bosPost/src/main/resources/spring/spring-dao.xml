@@ -65,7 +65,9 @@
 		 	<property name="basePackage" value="cn.huchao.mapper"/>
 		 	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 		 </bean> -->
-	
+	<bean id="baseDao" class="cn.huchao.dao.impl.BaseDaoImpl">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
 
 
 </beans>

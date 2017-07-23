@@ -1,9 +1,11 @@
 package cn.huchao.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import cn.huchao.dao.IBaseDao;
 
@@ -13,6 +15,7 @@ import cn.huchao.dao.IBaseDao;
  *	@description
  *
  */
+@Repository
 public class BaseDaoImpl implements IBaseDao {
 	private SqlSession sqlSession;
 	
@@ -178,5 +181,12 @@ public class BaseDaoImpl implements IBaseDao {
 	public int delete(String sqlId, Map<String, Object> map) {
 		return getSqlSession().delete(sqlId, map);
 	}
-	
+	@SuppressWarnings("rawtypes")
+	public String test(){
+		Map<String, Object> params=new HashMap<>();
+//		Object obj = queryForObject("Act.getDict", params);
+		List<Map> dictMapList = queryForList("Act.getDict", params, Map.class);
+		System.out.println(dictMapList);
+		return "success";
+	}
 }

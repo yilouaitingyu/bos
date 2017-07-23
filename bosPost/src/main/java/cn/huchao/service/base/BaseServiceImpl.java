@@ -1,5 +1,10 @@
 package cn.huchao.service.base;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import cn.huchao.dao.impl.BaseDaoImpl;
 
 /**
@@ -8,7 +13,10 @@ import cn.huchao.dao.impl.BaseDaoImpl;
  * @description
  *
  */
+@Service
+@Transactional
 public class BaseServiceImpl {
+	@Resource
 	private BaseDaoImpl baseDao;
 
 	public BaseDaoImpl getBaseDao() {
@@ -17,5 +25,10 @@ public class BaseServiceImpl {
 
 	public void setBaseDao(BaseDaoImpl baseDao) {
 		this.baseDao = baseDao;
+	}
+	public String getService(){
+		String test = baseDao.test();
+		System.out.println(test);
+		return "Service";
 	}
 }
