@@ -41,6 +41,7 @@ public class BaseAction {
 	@RequestMapping("login.action")
 	public String getLoginUser(){
 		String service = baseService.getService();
+		
 		System.out.println(service);
 		
 		return "/html/login/login.html";
