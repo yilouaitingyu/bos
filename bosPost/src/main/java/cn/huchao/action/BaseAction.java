@@ -1,9 +1,11 @@
 package cn.huchao.action;
 
+import java.io.IOException;
 import java.net.URI;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -58,5 +60,15 @@ public class BaseAction {
 		String url="/WEB-INF/pages/"+str1+"/"+str2+".jsp";
 		return "forward:"+url;
 	}
+	/*public void sendJson(String json,HttpServletResponse response){
+		try {
+			response.setContentType("application/json");
+			response.getWriter().print(json);
+			//logger.info("sendJson", json);
+		} catch (IOException e) {
+			e.printStackTrace();
+			//logger.error("sendJson", "Exception Occured When Send Json to Client !", e);
+		}
+	}*/
 
 }
