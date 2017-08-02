@@ -9,7 +9,7 @@ package cn.huchao.action;
 public class Pra1 {
 	public static void main(String[] args) {
 		//操作分支合并
-		String aa ="22";
+		String aa ="2288888";
 		System.out.println(aa);
 	}
 }
