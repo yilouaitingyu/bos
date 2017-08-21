@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#userid").click(function(){
+		$.ajax({
+			 url : "http://192.168.91.116:28090/top/front/sh/rules!checkPhone",//路径 
+			 type : "POST", //提交方式
+			 data:{
+				"uid":"rules_0001", 
+				"phone":"18239639432", 
+				"actId":"201708011624432910"
+			 },
+			 success : function(result){
+				 alert(result);
+			 }
+		});
+	});
+});
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<input type="button" id="userid" value="点击"/>
+</body>
+</html>

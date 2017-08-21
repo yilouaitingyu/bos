@@ -3,6 +3,7 @@ package cn.huchao.action;
 import java.io.IOException;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.huchao.service.common.IUserService;
+import cn.huchao.service.common.impl.UserServiceImpl;
 import cn.huchao.util.StringUtil;
 import cn.huchao.util.VerifyCodeUtils;
 
@@ -24,8 +27,18 @@ import cn.huchao.util.VerifyCodeUtils;
  */
 @Controller
 @RequestMapping("/user/")
-public class UserAction extends BaseMethod{
+public class UserAction extends BaseMethod {
 	Logger logger = LoggerFactory.getLogger(UserAction.class);
+	@Resource
+	public IUserService UserServiceImpl;
+
+	public IUserService getUserServiceImpl() {
+		return UserServiceImpl;
+	}
+
+	public void setUserServiceImpl(IUserService userServiceImpl) {
+		UserServiceImpl = userServiceImpl;
+	}
 
 	/**
 	 * 2017年7月24日 huchao
@@ -35,18 +48,20 @@ public class UserAction extends BaseMethod{
 	 */
 	@RequestMapping("login.action")
 	@ResponseBody
-	public String login(HttpSession session,HttpServletResponse response,HttpServletRequest request) {
+	public String login(HttpSession session, HttpServletResponse response, HttpServletRequest request) {
 		String str = request.getParameter("aaa");
-		response.setContentType("application/json;charset=UTF-8");//防止数据传递乱码
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+
+		response.setContentType("application/json;charset=UTF-8");// 防止数据传递乱码
 		System.out.println(str);
-		 String  verCode= StringUtil.clearBlank(session.getAttribute("verCode"));
-		 if (verCode.isEmpty()) {
+		String verCode = StringUtil.clearBlank(session.getAttribute("verCode"));
+		if (verCode.isEmpty()) {
 			return "验证码不为空,hhhhhh";
-		}else{
+		} else {
 			return "验证码为空，aaaaaa";
 		}
 	}
-	
 
 	/**
 	 * 2017年7月24日 huchao

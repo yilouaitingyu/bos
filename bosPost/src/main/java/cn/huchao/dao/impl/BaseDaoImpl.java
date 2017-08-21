@@ -9,16 +9,16 @@ import org.springframework.stereotype.Repository;
 
 import cn.huchao.dao.IBaseDao;
 
-
 /**
- * 2017年7月17日  huchao
- *	@description
+ * 2017年7月17日 huchao
+ * 
+ * @description
  *
  */
 @Repository
 public class BaseDaoImpl implements IBaseDao {
 	private SqlSession sqlSession;
-	
+
 	public SqlSession getSqlSession() {
 		return sqlSession;
 	}
@@ -26,6 +26,7 @@ public class BaseDaoImpl implements IBaseDao {
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
+
 	/**
 	 * 根据Id获取对象
 	 * 
@@ -80,8 +81,7 @@ public class BaseDaoImpl implements IBaseDao {
 	 * @return cls对应的类
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T queryForObject(String sqlId, Map<String, Object> params,
-			Class<T> cls) {
+	public <T> T queryForObject(String sqlId, Map<String, Object> params, Class<T> cls) {
 		return (T) getSqlSession().selectOne(sqlId, params);
 	}
 
@@ -109,26 +109,25 @@ public class BaseDaoImpl implements IBaseDao {
 	 *            返回的对象Class
 	 * @return 列表<cls对应的类>
 	 */
-	public <T> List<T> queryForList(String sqlId, Map<String, Object> params,
-			Class<T> cls) {
+	public <T> List<Map<String, Object>> queryForList(String sqlId, Map<String, Object> params, Class<T> cls) {
 		return getSqlSession().selectList(sqlId, params);
 	}
 
-/*	*//**
-	 * 查询列表
-	 * 
-	 * @param sqlId
-	 *            脚本编号
-	 * @param params
-	 *            参数
-	 * @return 列表
-	 *//*
-	public List<Map<String, Object>> queryForList(String sqlId,
-			Map<String, Object> param) {
-		List<Map<String, Object>> list = getSqlSession().selectList(sqlId, param);
-		List<Map<String, Object>> beans = ConvertUtil.convertSqlMap2JavaMap(list);
-		return beans;
-	}*/
+	/*	*//**
+			 * 查询列表
+			 * 
+			 * @param sqlId
+			 *            脚本编号
+			 * @param params
+			 *            参数
+			 * @return 列表
+			 *//*
+			 * public List<Map<String, Object>> queryForList(String sqlId,
+			 * Map<String, Object> param) { List<Map<String, Object>> list =
+			 * getSqlSession().selectList(sqlId, param); List<Map<String,
+			 * Object>> beans = ConvertUtil.convertSqlMap2JavaMap(list); return
+			 * beans; }
+			 */
 
 	/**
 	 * 修改数据
@@ -168,7 +167,7 @@ public class BaseDaoImpl implements IBaseDao {
 	public int delete(String sqlId, int id) {
 		return getSqlSession().delete(sqlId, id);
 	}
-	
+
 	/**
 	 * 删除数据
 	 * 
@@ -181,11 +180,11 @@ public class BaseDaoImpl implements IBaseDao {
 	public int delete(String sqlId, Map<String, Object> map) {
 		return getSqlSession().delete(sqlId, map);
 	}
-	@SuppressWarnings("rawtypes")
-	public String test(){
-		Map<String, Object> params=new HashMap<>();
-//		Object obj = queryForObject("Act.getDict", params);
-		List<Map> dictMapList = queryForList("Act.getDict", params, Map.class);
+
+	public String test() {
+		Map<String, Object> params = new HashMap<>();
+		// Object obj = queryForObject("Act.getDict", params);
+		List<Map<String, Object>> dictMapList = queryForList("Act.getDict", params, Map.class);
 		System.out.println(dictMapList);
 		return "success";
 	}

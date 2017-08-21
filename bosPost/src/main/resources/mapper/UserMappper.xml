@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="UserMapper" >
+<!-- 基本的sql语句 Start-->
+<!-- 最全数据库映射，这个映射不做sql片段使用，仅仅是声明，底下所有出现的字段都需要在这里显示， -->
+  <sql id="Property_Column_Map" >
+  <!-- 表字段 -->
+       
+  </sql>
+  <sql id="Base_User">
+  	
+  </sql>
+  <!-- 然后是特定数据库映射 -->
+ <!-- 基本的sql语句  End-->
+<!-- ****************************************************************-->
+ <!-- select查询语句 Start-->
+<!-- huchao -->
+<!-- 根据表组查询表信息 -->
+   <select id="getUserInfoByUserName">
+   	select * from 
+   </select>
+   
+   
+   
+<!-- huchao -->
+ 
+ 
+ <!-- select查询语句 End-->
+<!-- ****************************************************************-->
+ <!-- insert插入语句 Start-->
+
+
+
+ 
+ <!-- insert插入语句 End-->
+<!-- ****************************************************************-->
+ <!-- update修改语句 Start-->
+ <!-- 修改表的数据信息 -->
+ 
+ 
+ 
+ 
+ <!-- update修改语句 End-->
+<!-- ****************************************************************-->
+ <!-- delecte删除语句 Start-->
+ 
+ <!-- delecte删除语句 End-->
+</mapper>

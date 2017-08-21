@@ -6,5 +6,6 @@ package cn.huchao.constants;
  * @description 公用的常量类
  */
 public class ComConstants {
-
+	public static final String SUCCESS = "0";
+	public static final String FAIL = "5555";
 }
