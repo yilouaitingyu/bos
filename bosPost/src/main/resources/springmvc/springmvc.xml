@@ -12,16 +12,37 @@
 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+		
+	<!-- 解决使用responseBody时出现中文响应乱码的情况,应放置在mvc注解器之前 -->	
+		 <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">  
+        <property name="messageConverters">  
+            <list>  
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">  
+                    <property name="supportedMediaTypes">  
+                        <list>  
+                            <value>text/html;charset=UTF-8</value>  
+                        </list>  
+                    </property>  
+                </bean>  
+            </list>  
+        </property>  
+    </bean>  
+	<mvc:annotation-driven></mvc:annotation-driven>	
+		
+		
+		
 	<!-- 注解处理器映射器和适配器，为了使用注解进行url映射和handler适配 -->
-	<mvc:annotation-driven>
-		<!-- 消息转换器，防止响应中文乱码 -->
+	<!-- <mvc:annotation-driven>
+		消息转换器，防止响应中文乱码
 	     <mvc:message-converters register-defaults="true">
 	    <bean class="org.springframework.http.converter.StringHttpMessageConverter">
 	      <property name="supportedMediaTypes" value = "text/plain;charset=UTF-8" />
 	    </bean>
 	   </mvc:message-converters>
-     </mvc:annotation-driven>
-	
+     </mvc:annotation-driven> -->
+     
+     
+     
 
 	
 	
