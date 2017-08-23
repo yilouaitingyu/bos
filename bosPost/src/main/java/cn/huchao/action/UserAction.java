@@ -1,6 +1,7 @@
 package cn.huchao.action;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -9,14 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.huchao.bean.OutParams;
+import cn.huchao.constants.ComConstants;
 import cn.huchao.service.common.IUserService;
 import cn.huchao.service.common.impl.UserServiceImpl;
+import cn.huchao.util.JsonUtil;
 import cn.huchao.util.StringUtil;
 import cn.huchao.util.VerifyCodeUtils;
 
@@ -30,14 +35,14 @@ import cn.huchao.util.VerifyCodeUtils;
 public class UserAction extends BaseMethod {
 	Logger logger = LoggerFactory.getLogger(UserAction.class);
 	@Resource
-	public IUserService UserServiceImpl;
+	public IUserService UserService;
 
-	public IUserService getUserServiceImpl() {
-		return UserServiceImpl;
+	public IUserService getUserService() {
+		return UserService;
 	}
 
-	public void setUserServiceImpl(IUserService userServiceImpl) {
-		UserServiceImpl = userServiceImpl;
+	public void setUserService(IUserService userService) {
+		UserService = userService;
 	}
 
 	/**
@@ -49,18 +54,34 @@ public class UserAction extends BaseMethod {
 	@RequestMapping("login.action")
 	@ResponseBody
 	public String login(HttpSession session, HttpServletResponse response, HttpServletRequest request) {
-		String str = request.getParameter("aaa");
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-
 		response.setContentType("application/json;charset=UTF-8");// 防止数据传递乱码
-		System.out.println(str);
+		OutParams outParams = new OutParams();
+		//先校验验证码是否正确
 		String verCode = StringUtil.clearBlank(session.getAttribute("verCode"));
-		if (verCode.isEmpty()) {
-			return "验证码不为空,hhhhhh";
-		} else {
-			return "验证码为空，aaaaaa";
+		String checkcode = StringUtil.clearBlank(request.getParameter("checkcode"));
+		if (!verCode.equalsIgnoreCase(checkcode)) {
+			outParams.setReturnCode(ComConstants.FAIL);
+			outParams.setReturnMsg("验证码不正确");
+			return JsonUtil.convertObject2Json(outParams);
+		} 
+		String userName = StringUtil.clearBlank(request.getParameter("userName"));
+		String password = StringUtil.clearBlank(request.getParameter("password"));
+		Map<String, Object> userMap = UserService.getUserByUserName(userName);
+		if (MapUtils.isNotEmpty(userMap)) {
+			if (!password.equals(userMap.get("password"))) {
+				//密码不正确
+				outParams.setReturnCode(ComConstants.FAIL);
+				outParams.setReturnMsg("密码不正确");
+				return JsonUtil.convertObject2Json(outParams);
+			}
+		}else{
+			outParams.setReturnCode(ComConstants.FAIL);
+			outParams.setReturnMsg("用户名不正确");
+			return JsonUtil.convertObject2Json(outParams);
+			//用户名不正确
 		}
+		outParams.setReturnCode(ComConstants.SUCCESS);
+		return JsonUtil.convertObject2Json(outParams);
 	}
 
 	/**
