@@ -10,27 +10,27 @@
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/style_grey.css" />
 <style>
 input[type=text] {
-	width: 80%;
-	height: 25px;
-	font-size: 12pt;
-	font-weight: bold;
-	margin-left: 45px;
-	padding: 3px;
-	border-width: 0;
+	width: 75%;
+    height: 30px;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-left: 60px;
+    padding: 1px;
+    border-width: 0;
 }
 
 input[type=password] {
-	width: 80%;
-	height: 25px;
+	width: 60%;
+	height: 30px;
 	font-size: 12pt;
 	font-weight: bold;
-	margin-left: 45px;
-	padding: 3px;
+	margin-left: 60px;
+	padding: 1px;
 	border-width: 0;
 }
 
 #loginform\:codeInput {
-	margin-left: 1px;
+	margin-left: 5px;
 	margin-top: 1px;
 }
 

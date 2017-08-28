@@ -208,7 +208,7 @@
 				<tr>
 					<td style="width: 330px;">
 						<div style="color:black; font-size: 11pt;">
-							传智播客 | Powered by 郑州JavaEE1期第 xx 小组
+							沈阳工业大学 | Designed By 自动化三班1103|胡超
 						</div>
 					</td>
 					<td style="width: *;text-align:right" class="co1"><span id="online"
