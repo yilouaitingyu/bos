@@ -208,7 +208,7 @@
 				<tr>
 					<td style="width: 330px;">
 						<div style="color:black; font-size: 11pt;">
-							沈阳工业大学 | Designed By 自动化三班1103|胡超
+							沈阳工业大学 | Designed By 自动化1103班|胡超
 						</div>
 					</td>
 					<td style="width: *;text-align:right" class="co1"><span id="online"
