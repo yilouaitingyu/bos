@@ -94,8 +94,8 @@ input[type=password] {
 	</div>
 	<div
 		style="width: 900px; height: 50px; position: absolute; text-align: left; left: 50%; top: 50%; margin-left: -450px;; margin-top: 220px;">
-		<span style="color: #488ED5;">Powered By www.itcast.cn</span><span
-			style="color: #488ED5;margin-left:10px;">推荐使用Firefox浏览器</a>
+		<span style="color: #488ED5;">Designed By 胡超</span><span
+			style="color: #488ED5;margin-left:10px;">推荐使用Google Chrome浏览器</a>
 		</span><span style="float: right; color: #488ED5;">宅急送BOS系统</span>
 	</div>
 </body>

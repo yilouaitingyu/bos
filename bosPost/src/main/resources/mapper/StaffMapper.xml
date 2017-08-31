@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="StaffMapper" >
+<!-- 基本的sql语句 Start-->
+<!-- 最全数据库映射，这个映射不做sql片段使用，仅仅是声明，底下所有出现的字段都需要在这里显示， -->
+  <sql id="Property_Column_Map" >
+  <!-- 表字段 -->
+       
+  </sql>
+  <sql id="Base_Staff">
+  	
+  </sql>
+  <!-- 然后是特定数据库映射 -->
+ <!-- 基本的sql语句  End-->
+<!-- ****************************************************************-->
+ <!-- select查询语句 Start-->
+<!-- huchao -->
+<!-- 根据取派员表组查询表信息 -->
+   
+<!-- huchao -->
+ 
+ 
+ <!-- select查询语句 End-->
+<!-- ****************************************************************-->
+ <!-- insert插入语句 Start-->
+<insert id="insertStaff" parameterType="java.util.Map" >
+    insert into staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="staffId != null  and staffId != '' " >
+        staff_id,
+      </if>
+      <if test="staffName != null  and staffName != '' " >
+        staff_name,
+      </if>
+      <if test="staffPhone != null  and staffPhone != '' " >
+        staff_phone,
+      </if>
+      <if test="haspda != null  and haspda != '' " >
+        haspda,
+      </if>
+      <if test="deltag != null  and deltag != '' " >
+        deltag,
+      </if>
+      <if test="station != null  and station != '' " >
+        station,
+      </if>
+      <if test="standard != null  and standard != '' " >
+        standard,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="staffId != null  and staffId != '' " >
+        #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="staffName != null  and staffName != '' " >
+        #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffPhone != null  and staffPhone != '' " >
+        #{staffPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="haspda != null  and haspda != '' " >
+        #{haspda,jdbcType=VARCHAR},
+      </if>
+      <if test="deltag != null  and deltag != '' " >
+        #{deltag,jdbcType=VARCHAR},
+      </if>
+      <if test="station != null  and station != '' " >
+        #{station,jdbcType=VARCHAR},
+      </if>
+      <if test="standard != null and standard != '' " >
+        #{standard,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+ 
+ <!-- insert插入语句 End-->
+<!-- ****************************************************************-->
+ <!-- update修改语句 Start-->
+ <!-- 修改表的数据信息 -->
+ 
+ 
+ 
+ 
+ <!-- update修改语句 End-->
+<!-- ****************************************************************-->
+ <!-- delecte删除语句 Start-->
+ 
+ <!-- delecte删除语句 End-->
+</mapper>

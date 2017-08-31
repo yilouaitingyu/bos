@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 
-
 /**
  * @author huchao
  * @2017年7月14日
@@ -90,20 +89,29 @@ public class ListUtil {
 		// st));
 		return diff;
 	}
-	 public static void main(String[] args) {
-			/*List<String> list1 =new ArrayList<>();
-			list1.add("1");
-			list1.add("2");
-			list1.add("3");
-			list1.add("4");
-			list1.add("5");
-			List<String> list2 =new ArrayList<>();
-			list2.add("3");
-			list2.add("4");
-			list2.add("5");
-			list2.add("6");
-			list2.add("7");
-			List<String> diffrent3 = getDiffList(list1, list2);
-			System.out.println(diffrent3);*/
+
+	/**
+	 * @description 取第一个数组的值作为value，组成新的map，注意：当有多个值的时候会丢失值
+	 * @return
+	 * @2017年8月31日
+	 * @author huchao
+	 */
+	public static Map<String, Object> getMapFromReq(Map<String, String[]> parameterMap) {
+		Map<String, Object> map = new HashMap<>();
+		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+			map.put(entry.getKey(), StringUtil.clearBlank(entry.getValue()[0]));
 		}
+		return map;
+	}
+
+	public static void main(String[] args) {
+		/*
+		 * List<String> list1 =new ArrayList<>(); list1.add("1");
+		 * list1.add("2"); list1.add("3"); list1.add("4"); list1.add("5");
+		 * List<String> list2 =new ArrayList<>(); list2.add("3");
+		 * list2.add("4"); list2.add("5"); list2.add("6"); list2.add("7");
+		 * List<String> diffrent3 = getDiffList(list1, list2);
+		 * System.out.println(diffrent3);
+		 */
+	}
 }

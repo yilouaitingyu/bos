@@ -27,6 +27,7 @@
 <script
 	src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"
 	type="text/javascript"></script>
+<script src="${pageContext.request.contextPath }/js/easyui/outOfBounds.js" type="text/javascript"></script>
 <script type="text/javascript">
 	// 初始化ztree菜单
 	$(function() {
@@ -145,7 +146,7 @@
 	}
 	// 版权信息
 	function showAbout(){
-		$.messager.alert("宅急送BOS v2.0","管理员邮箱: zhangdongxu@itcast.cn");
+		$.messager.alert("宅急送BOS v2.0","管理员邮箱: 1970205750@qq.com");
 	}
 </script>
 </head>
