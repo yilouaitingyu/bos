@@ -104,6 +104,25 @@ public class ListUtil {
 		return map;
 	}
 
+	/**
+	 * @description 从一个map集合中，获取数组所代表的key对应的键值对，将其封装进一个新的集合中
+	 * @param map
+	 * @param strArr
+	 * @return
+	 * @2017年9月1日
+	 * @author huchao
+	 */
+	public static Map<String, Object> getMapFromMapByArray(Map<String, Object> map, String[] strArr) {
+		Map<String, Object> params = new HashMap<>();
+		if (map == null) {
+			return params;
+		}
+		for (String str : strArr) {
+			map.put(str, map.get(str));
+		}
+		return params;
+	}
+
 	public static void main(String[] args) {
 		/*
 		 * List<String> list1 =new ArrayList<>(); list1.add("1");

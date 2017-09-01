@@ -1,6 +1,5 @@
 package cn.huchao.service.post.impl;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -12,6 +11,7 @@ import cn.huchao.bean.OutParams;
 import cn.huchao.constants.ComConstants;
 import cn.huchao.dao.impl.BaseDaoImpl;
 import cn.huchao.service.post.IStaffService;
+import cn.huchao.util.ListUtil;
 
 /**
  * @author huchao
@@ -31,18 +31,14 @@ public class StaffServiceImpl implements IStaffService {
 	public void setBaseDao(BaseDaoImpl baseDao) {
 		this.baseDao = baseDao;
 	}
+
 	/**
 	 * 添加取派员
 	 */
 	public OutParams addStaff(Map<String, Object> beanIn) {
 		// 重新封装参数，需要哪些参数显示出来
-		Map<String, Object> params = new HashMap<>();
-		params.put("staffId", beanIn.get("staffId"));
-		params.put("staffName", beanIn.get("staffName"));
-		params.put("staffPhone", beanIn.get("staffPhone"));
-		params.put("station", beanIn.get("station"));
-		params.put("haspda", beanIn.get("haspda"));
-		params.put("standard", beanIn.get("standard"));
+		String[] strArr = new String[] { "staffId", "staffName", "staffPhone", "station", "haspda", "standard" };
+		Map<String, Object> params = ListUtil.getMapFromMapByArray(beanIn, strArr);
 		//
 		OutParams outParams = new OutParams();
 		int num = getBaseDao().insert("StaffMapper.insertStaff", params);
