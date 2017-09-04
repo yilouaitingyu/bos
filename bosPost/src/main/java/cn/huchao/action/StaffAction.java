@@ -12,10 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.huchao.bean.BosException;
 import cn.huchao.bean.OutParams;
+import cn.huchao.constants.ComConstants;
 import cn.huchao.service.post.IStaffService;
 import cn.huchao.util.JsonUtil;
 import cn.huchao.util.ListUtil;
+import cn.huchao.util.MapUtil;
 
 /**
  * @author huchao
@@ -50,7 +53,40 @@ public class StaffAction {
 		// StringUtil.clearBlank(request.getAttribute("staffId"));
 		// 获取参数值，
 		Map<String, Object> params = ListUtil.getMapFromReq(request.getParameterMap());
-		OutParams outParams = staffService.addStaff(params);
+		OutParams outParams = new OutParams();
+		try {
+			outParams = staffService.addStaff(params);
+		} catch (BosException e) {
+			outParams.setReturnCode(ComConstants.FAIL);
+			outParams.setReturnMsg("添加取派员错误");
+			logger.error("添加取派员错误", e);
+		}
 		return JsonUtil.convertObject2Json(outParams);
 	}
+
+	/**
+	 * @description 查询所有的取派员信息
+	 * @param response
+	 * @param request
+	 * @return
+	 * @2017年9月4日
+	 * @author huchao
+	 */
+	@RequestMapping("queryAll.action")
+	@ResponseBody
+	public String queryAll(HttpServletResponse response, HttpServletRequest request) {
+		// 获取参数值，
+		Map<String, Object> params = MapUtil.getMapFromReq(request.getParameterMap());
+		//params.put("pageFlag", "true");
+		OutParams outParams = new OutParams();
+		try {
+			outParams = staffService.queryStaffByCond(params);
+		} catch (BosException e) {
+			outParams.setReturnCode(ComConstants.FAIL);
+			outParams.setReturnMsg("查询取派员错误");
+			logger.error("queryAll查询取派员信息失败", e);
+		}
+		return JsonUtil.convertObject2Json(outParams);
+	}
+
 }

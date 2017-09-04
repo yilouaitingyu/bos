@@ -81,12 +81,12 @@
 		field : 'id',
 		checkbox : true,
 	}, {
-		field : 'name',
+		field : 'staffName',
 		title : '姓名',
 		width : 120,
 		align : 'center'
 	}, {
-		field : 'telephone',
+		field : 'staffPhone',
 		title : '手机号',
 		width : 120,
 		align : 'center'
@@ -103,7 +103,7 @@
 			}
 		}
 	}, {
-		field : 'deltag',
+		field : 'status',
 		title : '是否作废',
 		width : 120,
 		align : 'center',
@@ -121,10 +121,12 @@
 		align : 'center'
 	}, {
 		field : 'station',
-		title : '所谓单位',
+		title : '所属单位',
 		width : 200,
 		align : 'center'
 	} ] ];
+	//设置分页栏的信息
+	
 
 	$(function() {
 		// 先将body隐藏，再显示，不会出现页面刷新效果
@@ -139,14 +141,21 @@
 			border : false,
 			rownumbers : true,
 			striped : true,
-			pageList : [ 30, 50, 100 ],
+			pageList : [ 3, 4, 10 ],
 			pagination : true,
 			toolbar : toolbar,
-			url : "${pageContext.request.contextPath }/json/staff.json",
+			url : "",
+			loadMsg: "数据加载中...",
 			idField : 'id',
 			columns : columns,
+			queryParams : { pageFlag : 'true'},
 			onDblClickRow : doDblClickRow
 		});
+		$('#grid').datagrid('getPager').pagination({  
+			  
+	        displayMsg:'当前显示第 {from}-{to} 条记录 ， 共 {total} 条记录'  
+	  
+	    });  
 
 		// 添加取派员窗口
 		$('#addStaffWindow').window({
@@ -172,8 +181,38 @@
 				$("#addForm").submit();
 			}
 		})
+		//查询取派员
+		queryStaffAll();
 	});
-
+	
+	
+	//查询所有的取派员
+	function queryStaffAll() {
+		var options = $("#grid").datagrid('getPager').data("pagination").options;
+		options.pageSize = 3;//设定初始每页展示3条
+		query(options);
+	}
+	//查询数据
+	function query(options) {
+		var page = options.pageNumber;//当前页数  
+		var pageSize = options.pageSize;//每页的记录数（行数） 
+		$.ajax({
+			 url : "${pageContext.request.contextPath }/staff/queryAll.action",//路径 
+			 type : "POST", //提交方式
+			 data:{
+				"page":page, 
+				"pageSize":pageSize, 
+				"pageFlag":"true"
+			 },
+			 success : function(result){
+				 //将数据塞到数据表格中
+				 var data=JSON.parse(result);
+				 if (data.returnCode=="0") {
+					 $("#grid").datagrid("loadData",data.bean);
+				}
+			 }
+		});
+	}
 	function doDblClickRow(rowIndex, rowData) {
 		alert("双击表格数据...");
 	}

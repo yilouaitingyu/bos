@@ -8,7 +8,8 @@
        
   </sql>
   <sql id="Base_Staff">
-  	
+    a.staff_id staffId, a.staff_name staffName, a.staff_phone staffPhone, a.haspda haspda, a.status status, 
+    a.station station, a.standard standard
   </sql>
   <!-- 然后是特定数据库映射 -->
  <!-- 基本的sql语句  End-->
@@ -16,7 +17,35 @@
  <!-- select查询语句 Start-->
 <!-- huchao -->
 <!-- 根据取派员表组查询表信息 -->
-   
+   <select id="queryStaffByCond" resultType="java.util.Map" parameterType="java.util.Map">
+   	select <include refid="Base_Staff"/> from staff a
+   	where 1=1  
+   	<if test="staffId != null" >
+       and  a.staff_id = #{staffId,jdbcType=VARCHAR}
+      </if>
+   	<if test="staffName != null" >
+      and  a.staff_name = #{staffName,jdbcType=VARCHAR}
+      </if>
+      <if test="staffPhone != null" >
+      and  a.staff_phone = #{staffPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="haspda != null" >
+     and   a.haspda = #{haspda,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null" >
+      and  a.status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="station != null" >
+      and  a.station = #{station,jdbcType=VARCHAR}
+      </if>
+      <if test="standard != null" >
+      and a.standard = #{standard,jdbcType=VARCHAR}
+      </if>
+      order by a.staff_id asc
+	  <if test="pageFlag == 'true' ">
+			limit #{startRow,jdbcType=VARCHAR},#{pageSize,jdbcType=VARCHAR}
+	</if>
+   </select>
 <!-- huchao -->
  
  
@@ -38,8 +67,8 @@
       <if test="haspda != null  and haspda != '' " >
         haspda,
       </if>
-      <if test="deltag != null  and deltag != '' " >
-        deltag,
+      <if test="status != null  and status != '' " >
+        status,
       </if>
       <if test="station != null  and station != '' " >
         station,
@@ -61,8 +90,8 @@
       <if test="haspda != null  and haspda != '' " >
         #{haspda,jdbcType=VARCHAR},
       </if>
-      <if test="deltag != null  and deltag != '' " >
-        #{deltag,jdbcType=VARCHAR},
+      <if test="status != null  and status != '' " >
+        #{status,jdbcType=VARCHAR},
       </if>
       <if test="station != null  and station != '' " >
         #{station,jdbcType=VARCHAR},
