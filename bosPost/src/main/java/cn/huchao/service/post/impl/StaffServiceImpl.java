@@ -56,14 +56,16 @@ public class StaffServiceImpl implements IStaffService {
 
 	/**
 	 * 条件查询取派员，可选分页展示，或者不分页展示（无pageFlag或者pageFlag为false）
-	 * @throws BosException 
+	 * 
+	 * @throws BosException
 	 */
-	public OutParams queryStaffByCond(Map<String, Object> beanIn)  {
+	public OutParams queryStaffByCond(Map<String, Object> beanIn) {
 		// 重新封装参数，需要哪些参数显示出来
 		String[] strArr = new String[] { "staffId", "staffName", "staffPhone", "station", "haspda", "standard" };
 		Map<String, Object> params = MapUtil.getMapFromMapByArray(beanIn, strArr);
-		//添加分页信息
-		Map<String, Object> pageCond = PageUtil.getPageCondByArr(beanIn, new String[] { "pageFlag", "page", "pageSize"});
+		// 添加分页信息
+		Map<String, Object> pageCond = PageUtil.getPageCondByArr(beanIn,
+				new String[] { "pageFlag", "page", "pageSize" });
 		params.putAll(pageCond);
 		//
 		OutParams outParams = new OutParams();
@@ -73,6 +75,24 @@ public class StaffServiceImpl implements IStaffService {
 		outParams.setReturnCode(ComConstants.SUCCESS);
 		outParams.setBean(staffMapList);
 		return outParams;
+	}
+	/**
+	 * 根据StaffId修改取派员的数据
+	 */
+	public OutParams updateByStaffId(Map<String, Object> beanIn) throws BosException {
+		// 重新封装参数，需要哪些参数显示出来
+		String[] strArr = new String[] { "staffId", "staffName", "staffPhone", "station", "haspda", "standard" };
+		Map<String, Object> params = MapUtil.getMapFromMapByArray(beanIn, strArr);
+		//
+		OutParams outParams = new OutParams();
+		int num = getBaseDao().update("StaffMapper.updateByStaffId", params);
+		if (num<1) {
+			throw new BosException("修改数据失败");
+		}
+		// 如果修改失败，会报异常，所以返回码不会是成功
+		outParams.setReturnCode(ComConstants.SUCCESS);
+		return outParams;
+
 	}
 
 }

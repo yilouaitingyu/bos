@@ -15,4 +15,5 @@ public interface IStaffService {
 	public OutParams addStaff(Map<String, Object> beanIn) throws BosException;
 
 	public OutParams queryStaffByCond(Map<String, Object> beanIn) throws BosException;
+	public OutParams updateByStaffId(Map<String, Object> beanIn) throws BosException;
 }

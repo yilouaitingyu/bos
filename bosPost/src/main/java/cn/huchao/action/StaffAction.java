@@ -77,7 +77,7 @@ public class StaffAction {
 	public String queryAll(HttpServletResponse response, HttpServletRequest request) {
 		// 获取参数值，
 		Map<String, Object> params = MapUtil.getMapFromReq(request.getParameterMap());
-		//params.put("pageFlag", "true");
+		// params.put("pageFlag", "true");
 		OutParams outParams = new OutParams();
 		try {
 			outParams = staffService.queryStaffByCond(params);
@@ -88,5 +88,27 @@ public class StaffAction {
 		}
 		return JsonUtil.convertObject2Json(outParams);
 	}
-
+	/**
+	 * @description
+	 *	修改取派员数据
+	 * @param response
+	 * @param request
+	 * @return
+	 *@2017年9月5日
+	 *@author huchao
+	 */
+	@RequestMapping("updateStaff.action")
+	@ResponseBody
+	public String update(HttpServletResponse response, HttpServletRequest request) {
+		Map<String, Object> params = MapUtil.getMapFromReq(request.getParameterMap());
+		OutParams outParams = new OutParams();
+		try {
+			outParams=staffService.updateByStaffId(params);
+		} catch (BosException e) {
+			outParams.setReturnCode(ComConstants.FAIL);
+			outParams.setReturnMsg("修改取派员错误");
+			logger.error("修改取派员信息失败", e);
+		}
+		return JsonUtil.convertObject2Json(outParams);
+	}
 }

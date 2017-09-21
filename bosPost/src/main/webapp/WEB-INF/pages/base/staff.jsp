@@ -141,7 +141,7 @@
 			border : false,
 			rownumbers : true,
 			striped : true,
-			pageList : [ 3, 4, 10 ],
+			pageList : [ 5, 7, 10 ],
 			pagination : true,
 			toolbar : toolbar,
 			url : "",
@@ -183,13 +183,39 @@
 		})
 		//查询取派员
 		queryStaffAll();
+		
+		
+		
+		
+		
+		
+		var pg = $("#grid").datagrid("getPager");    
+		if(pg)    
+		{    
+		   $(pg).pagination({    
+		       onBeforeRefresh:function(){    
+		           alert('before refresh');    
+		    },    
+		       onRefresh:function(page,rows){    
+		           alert(page);    
+		           alert(rows);    
+		        },    
+		       onChangePageSize:function(){    
+		           alert('pagesize changed');    
+		        },    
+		       onSelectPage:function(page,rows){    
+		           alert(page);    
+		           alert(rows);    
+		        }    
+		   });    
+		} 
 	});
 	
 	
 	//查询所有的取派员
 	function queryStaffAll() {
 		var options = $("#grid").datagrid('getPager').data("pagination").options;
-		options.pageSize = 3;//设定初始每页展示3条
+		options.pageSize = 5;//设定初始每页展示3条
 		query(options);
 	}
 	//查询数据

@@ -108,7 +108,30 @@
 <!-- ****************************************************************-->
  <!-- update修改语句 Start-->
  <!-- 修改表的数据信息 -->
- 
+ <update id="updateByStaffId" resultType="java.util.Map" parameterType="java.util.Map" >
+    update staff a
+    <set >
+      <if test="staffName != null" >
+        a.staff_name = #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffPhone != null" >
+        a.staff_phone = #{staffPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="haspda != null" >
+        a.haspda = #{haspda,jdbcType=VARCHAR},
+      </if>
+      <if test="deltag != null" >
+        a.deltag = #{deltag,jdbcType=VARCHAR},
+      </if>
+      <if test="station != null" >
+        a.station = #{station,jdbcType=VARCHAR},
+      </if>
+      <if test="standard != null" >
+        a.standard = #{standard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where a.staff_id = #{staffId,jdbcType=VARCHAR}
+  </update>
  
  
  
