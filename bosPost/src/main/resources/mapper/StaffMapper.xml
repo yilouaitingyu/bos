@@ -108,7 +108,7 @@
 <!-- ****************************************************************-->
  <!-- update修改语句 Start-->
  <!-- 修改表的数据信息 -->
- <update id="updateByStaffId" resultType="java.util.Map" parameterType="java.util.Map" >
+ <update id="updateByStaffId"  parameterType="java.util.Map" >
     update staff a
     <set >
       <if test="staffName != null" >
@@ -138,6 +138,9 @@
  <!-- update修改语句 End-->
 <!-- ****************************************************************-->
  <!-- delecte删除语句 Start-->
- 
+ <delete id="deleteById" parameterType="java.util.Map" >
+      DELETE FROM staff 
+      WHERE id = #{Id}
+   </delete>
  <!-- delecte删除语句 End-->
 </mapper>

@@ -47,7 +47,7 @@ public class MapUtil {
 		}
 		for (String str : strArr) {
 			if (map.get(str) != null) {
-				map.put(str, map.get(str));
+				params.put(str, map.get(str));
 			}
 		}
 		return params;

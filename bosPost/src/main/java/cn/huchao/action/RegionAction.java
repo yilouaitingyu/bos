@@ -15,61 +15,62 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.huchao.bean.BosException;
 import cn.huchao.bean.OutParams;
 import cn.huchao.constants.ComConstants;
-import cn.huchao.service.post.IStaffService;
+import cn.huchao.service.post.IRegionService;
 import cn.huchao.util.JsonUtil;
 import cn.huchao.util.ListUtil;
 import cn.huchao.util.MapUtil;
 
 /**
  * @author huchao
- * @2017年8月31日
- * @description 取派员的增删改查Action
+ * @version 1.0
+ * @description 地区的增删改查
+ *  
  */
 @Controller
-@RequestMapping("/staff/")
-public class StaffAction {
+@RequestMapping("/region/")
+public class RegionAction {
 	@Resource
-	private IStaffService staffService;
-	Logger logger = LoggerFactory.getLogger(StaffAction.class);
+	private IRegionService regionService;
+	Logger logger = LoggerFactory.getLogger(RegionAction.class);
 
-	public IStaffService getStaffService() {
-		return staffService;
+	public IRegionService getRegionService() {
+		return regionService;
 	}
 
-	public void setStaffService(IStaffService staffService) {
-		this.staffService = staffService;
+	public void setRegionService(IRegionService regionService) {
+		this.regionService = regionService;
 	}
 
 	/**
-	 * @description 增加取派员
+	 * @description 增加地区
 	 * @return
-	 * @2017年8月31日
+	 * @2017-09-28
 	 * @author huchao
 	 */
 	@RequestMapping("add.action")
 	@ResponseBody
 	public String add(HttpServletResponse response, HttpServletRequest request) {
-		// String staffId =
-		// StringUtil.clearBlank(request.getAttribute("staffId"));
+		// String regionId =
+		// StringUtil.clearBlank(request.getAttribute("regionId"));
 		// 获取参数值，
 		Map<String, Object> params = ListUtil.getMapFromReq(request.getParameterMap());
 		OutParams outParams = new OutParams();
 		try {
-			outParams = staffService.addStaff(params);
-		} catch (BosException e) {
+			outParams = regionService.addRegion(params);
+		} catch (Exception e) {
 			outParams.setReturnCode(ComConstants.FAIL);
-			outParams.setReturnMsg("添加取派员错误");
-			logger.error("添加取派员错误", e);
+			outParams.setReturnMsg("添加地区错误");
+			logger.error("添加地区错误", e);
 		}
 		return JsonUtil.convertObject2Json(outParams);
 	}
 
 	/**
-	 * @description 查询所有的取派员信息
+	 * @description 查询所有的地区信息
 	 * @param response
 	 * @param request
 	 * @return
-	 * @2017年9月4日
+	 * @2017-09-28
 	 * @author huchao
 	 */
 	@RequestMapping("queryAll.action")
@@ -80,59 +81,58 @@ public class StaffAction {
 		// params.put("pageFlag", "true");
 		OutParams outParams = new OutParams();
 		try {
-			outParams = staffService.queryStaffByCond(params);
+			outParams = regionService.queryRegionByCond(params);
 		} catch (BosException e) {
 			outParams.setReturnCode(ComConstants.FAIL);
-			outParams.setReturnMsg("查询取派员错误");
-			logger.error("queryAll查询取派员信息失败", e);
+			outParams.setReturnMsg("查询地区错误");
+			logger.error("queryAll查询地区信息失败", e);
 		}
 		return JsonUtil.convertObject2Json(outParams);
 	}
 	/**
 	 * @description
-	 *	修改取派员数据
+	 *	修改地区数据
 	 * @param response
 	 * @param request
 	 * @return
-	 *@2017年9月5日
-	 *@author huchao
+	 * @2017-09-28
+	 * @author huchao
 	 */
-	@RequestMapping("updateStaff.action")
+	@RequestMapping("updateRegion.action")
 	@ResponseBody
 	public String update(HttpServletResponse response, HttpServletRequest request) {
 		Map<String, Object> params = MapUtil.getMapFromReq(request.getParameterMap());
 		OutParams outParams = new OutParams();
 		try {
-			outParams=staffService.updateByStaffId(params);
+			outParams=regionService.updateByRegionId(params);
 		} catch (Exception e) {
 			outParams.setReturnCode(ComConstants.FAIL);
-			outParams.setReturnMsg("修改取派员错误");
-			logger.error("修改取派员信息失败", e);
+			outParams.setReturnMsg("修改地区错误");
+			logger.error("修改地区信息失败", e);
 		}
 		return JsonUtil.convertObject2Json(outParams);
 	}
 	/**
 	 * @description
-	 *	删除取派员数据
+	 *	删除地区数据
 	 * @param response
 	 * @param request
 	 * @return
-	 *@2017年9月5日
+	 *@2017-09-28
 	 *@author huchao
 	 */
-	@RequestMapping("deleteStaff.action")
+	@RequestMapping("deleteRegion.action")
 	@ResponseBody
 	public String delete(HttpServletResponse response, HttpServletRequest request) {
 		Map<String, Object> params = MapUtil.getMapFromReq(request.getParameterMap());
 		OutParams outParams = new OutParams();
 		try {
-			outParams=staffService.deleteById(params);
+			outParams=regionService.deleteById(params);
 		} catch (Exception e) {
 			outParams.setReturnCode(ComConstants.FAIL);
-			outParams.setReturnMsg("删除取派员错误");
-			logger.error("删除取派员信息失败", e);
+			outParams.setReturnMsg("删除地区错误");
+			logger.error("删除地区信息失败", e);
 		}
 		return JsonUtil.convertObject2Json(outParams);
 	}
-	
 }

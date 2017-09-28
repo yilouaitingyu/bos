@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="RegionMapper" >
+
+<!-- 基本的sql语句 Start-->
+<!-- 最全数据库映射，这个映射不做sql片段使用，仅仅是声明，底下所有出现的字段都需要在这里显示， -->
+  <sql id="Property_Column_Map" >
+  <!-- 表字段 -->
+       
+  </sql>
+  <sql id="Base_Region">
+  a.id  id,a.region_id  regionId,a.province  province,a.city  city,a.district  district,a.post_code  postCode,a.short_code  shortCode,a.city_code  cityCode
+  </sql>
+  <!-- 然后是特定数据库映射 -->
+ <!-- 基本的sql语句  End-->
+<!-- ****************************************************************-->
+ <!-- select查询语句 Start-->
+<!-- huchao -->
+<!-- 根据地区表组查询表信息 -->
+   <select id="queryRegionByCond" resultType="java.util.Map" parameterType="java.util.Map">
+   	select <include refid="Base_Region"/> from region a
+   	where 1=1  
+		<if test="regionId != null and regionId != '' " >
+		    and  a.region_id = #{regionId}   
+	     </if>
+		<if test="province != null and province != '' " >
+		    and  a.province = #{province}   
+	     </if>
+		<if test="city != null and city != '' " >
+		    and  a.city = #{city}   
+	     </if>
+		<if test="district != null and district != '' " >
+		    and  a.district = #{district}   
+	     </if>
+		<if test="postCode != null and postCode != '' " >
+		    and  a.post_code = #{postCode}   
+	     </if>
+		<if test="shortCode != null and shortCode != '' " >
+		    and  a.short_code = #{shortCode}   
+	     </if>
+		<if test="cityCode != null and cityCode != '' " >
+		    and  a.city_code = #{cityCode}   
+	     </if>
+      order by a.id asc
+	<if test="pageFlag == 'true' ">
+	  	limit #{startRow} ,#{pageSize} 
+	</if> 
+   </select>
+<!-- huchao -->
+ 
+ 
+ <!-- select查询语句 End-->
+<!-- ****************************************************************-->
+ <!-- insert插入语句 Start-->
+<insert id="insertRegion" parameterType="java.util.Map" >
+    insert into region
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+	    <if test="regionId != null and regionId != '' " >
+	        region_id   ,
+        </if>
+	    <if test="province != null and province != '' " >
+	        province   ,
+        </if>
+	    <if test="city != null and city != '' " >
+	        city   ,
+        </if>
+	    <if test="district != null and district != '' " >
+	        district   ,
+        </if>
+	    <if test="postCode != null and postCode != '' " >
+	        post_code   ,
+        </if>
+	    <if test="shortCode != null and shortCode != '' " >
+	        short_code   ,
+        </if>
+	    <if test="cityCode != null and cityCode != '' " >
+	        city_code   ,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	   <if test="regionId != null and regionId != '' " >
+	       #{regionId}  ,
+      </if>
+	   <if test="province != null and province != '' " >
+	       #{province}  ,
+      </if>
+	   <if test="city != null and city != '' " >
+	       #{city}  ,
+      </if>
+	   <if test="district != null and district != '' " >
+	       #{district}  ,
+      </if>
+	   <if test="postCode != null and postCode != '' " >
+	       #{postCode}  ,
+      </if>
+	   <if test="shortCode != null and shortCode != '' " >
+	       #{shortCode}  ,
+      </if>
+	   <if test="cityCode != null and cityCode != '' " >
+	       #{cityCode}  ,
+      </if>
+    </trim>
+  </insert>
+ <!-- insert插入语句 End-->
+<!-- ****************************************************************-->
+ <!-- update修改语句 Start-->
+ <!-- 修改表的数据信息 -->
+ <update id="updateByRegionId"  parameterType="java.util.Map" >
+    update region 
+    <set >
+		<if test="regionId != null and regionId != '' " >
+		     region_id = #{regionId} ,
+	    </if>
+		<if test="province != null and province != '' " >
+		     province = #{province} ,
+	    </if>
+		<if test="city != null and city != '' " >
+		     city = #{city} ,
+	    </if>
+		<if test="district != null and district != '' " >
+		     district = #{district} ,
+	    </if>
+		<if test="postCode != null and postCode != '' " >
+		     post_code = #{postCode} ,
+	    </if>
+		<if test="shortCode != null and shortCode != '' " >
+		     short_code = #{shortCode} ,
+	    </if>
+		<if test="cityCode != null and cityCode != '' " >
+		     city_code = #{cityCode} ,
+	    </if>
+    </set>
+    where 
+     region_id = #{regionId}
+  </update>
+ 
+ 
+ 
+ <!-- update修改语句 End-->
+<!-- ****************************************************************-->
+ <!-- delecte删除语句 Start-->
+ <delete id="deleteById" parameterType="java.util.Map" >
+      DELETE FROM region 
+      WHERE id = #{id}
+   </delete>
+ <!-- delecte删除语句 End-->
+</mapper>
