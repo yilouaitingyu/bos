@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="SubareaMapper" >
+
+<!-- 基本的sql语句 Start-->
+<!-- 最全数据库映射，这个映射不做sql片段使用，仅仅是声明，底下所有出现的字段都需要在这里显示， -->
+  <sql id="Property_Column_Map" >
+  <!-- 表字段 -->
+       
+  </sql>
+  <sql id="Base_Subarea">
+  a.id  id,a.subarea_id  subareaId,a.show_id  showId,a.province  province,a.city  city,a.district  district,a.addresskey  addresskey,a.startnum  startnum,a.endnum  endnum,a.single  single,a.position  position,a.region_id  regionId
+  </sql>
+  <!-- 然后是特定数据库映射 -->
+ <!-- 基本的sql语句  End-->
+<!-- ****************************************************************-->
+ <!-- select查询语句 Start-->
+<!-- huchao -->
+<!-- 根据地区表组查询表信息 -->
+   <select id="querySubareaByCond" resultType="java.util.Map" parameterType="java.util.Map">
+   	select <include refid="Base_Subarea"/> from subarea a
+   	where 1=1  
+		<if test="subareaId != null and subareaId != '' " >
+		    and  a.subarea_id = #{subareaId}   
+	     </if>
+		<if test="showId != null and showId != '' " >
+		    and  a.show_id = #{showId}   
+	     </if>
+		<if test="province != null and province != '' " >
+		    and  a.province = #{province}   
+	     </if>
+		<if test="city != null and city != '' " >
+		    and  a.city = #{city}   
+	     </if>
+		<if test="district != null and district != '' " >
+		    and  a.district = #{district}   
+	     </if>
+		<if test="addresskey != null and addresskey != '' " >
+		    and  a.addresskey = #{addresskey}   
+	     </if>
+		<if test="startnum != null and startnum != '' " >
+		    and  a.startnum = #{startnum}   
+	     </if>
+		<if test="endnum != null and endnum != '' " >
+		    and  a.endnum = #{endnum}   
+	     </if>
+		<if test="single != null and single != '' " >
+		    and  a.single = #{single}   
+	     </if>
+		<if test="position != null and position != '' " >
+		    and  a.position = #{position}   
+	     </if>
+		<if test="regionId != null and regionId != '' " >
+		    and  a.region_id = #{regionId}   
+	     </if>
+      order by a.id asc
+	<if test="pageFlag == 'true' ">
+	  	limit #{startRow} ,#{pageSize} 
+	</if> 
+   </select>
+<!-- huchao -->
+ 
+ 
+ <!-- select查询语句 End-->
+<!-- ****************************************************************-->
+ <!-- insert插入语句 Start-->
+<insert id="insertSubarea" parameterType="java.util.Map" >
+    insert into subarea
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+	    <if test="subareaId != null and subareaId != '' " >
+	        subarea_id   ,
+        </if>
+	    <if test="showId != null and showId != '' " >
+	        show_id   ,
+        </if>
+	    <if test="province != null and province != '' " >
+	        province   ,
+        </if>
+	    <if test="city != null and city != '' " >
+	        city   ,
+        </if>
+	    <if test="district != null and district != '' " >
+	        district   ,
+        </if>
+	    <if test="addresskey != null and addresskey != '' " >
+	        addresskey   ,
+        </if>
+	    <if test="startnum != null and startnum != '' " >
+	        startnum   ,
+        </if>
+	    <if test="endnum != null and endnum != '' " >
+	        endnum   ,
+        </if>
+	    <if test="single != null and single != '' " >
+	        single   ,
+        </if>
+	    <if test="position != null and position != '' " >
+	        position   ,
+        </if>
+	    <if test="regionId != null and regionId != '' " >
+	        region_id   ,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	   <if test="subareaId != null and subareaId != '' " >
+	       #{subareaId}  ,
+      </if>
+	   <if test="showId != null and showId != '' " >
+	       #{showId}  ,
+      </if>
+	   <if test="province != null and province != '' " >
+	       #{province}  ,
+      </if>
+	   <if test="city != null and city != '' " >
+	       #{city}  ,
+      </if>
+	   <if test="district != null and district != '' " >
+	       #{district}  ,
+      </if>
+	   <if test="addresskey != null and addresskey != '' " >
+	       #{addresskey}  ,
+      </if>
+	   <if test="startnum != null and startnum != '' " >
+	       #{startnum}  ,
+      </if>
+	   <if test="endnum != null and endnum != '' " >
+	       #{endnum}  ,
+      </if>
+	   <if test="single != null and single != '' " >
+	       #{single}  ,
+      </if>
+	   <if test="position != null and position != '' " >
+	       #{position}  ,
+      </if>
+	   <if test="regionId != null and regionId != '' " >
+	       #{regionId}  ,
+      </if>
+    </trim>
+  </insert>
+ <!-- insert插入语句 End-->
+<!-- ****************************************************************-->
+ <!-- update修改语句 Start-->
+ <!-- 修改表的数据信息 -->
+ <update id="updateBySubareaId"  parameterType="java.util.Map" >
+    update subarea 
+    <set >
+		<if test="subareaId != null and subareaId != '' " >
+		     subarea_id = #{subareaId} ,
+	    </if>
+		<if test="showId != null and showId != '' " >
+		     show_id = #{showId} ,
+	    </if>
+		<if test="province != null and province != '' " >
+		     province = #{province} ,
+	    </if>
+		<if test="city != null and city != '' " >
+		     city = #{city} ,
+	    </if>
+		<if test="district != null and district != '' " >
+		     district = #{district} ,
+	    </if>
+		<if test="addresskey != null and addresskey != '' " >
+		     addresskey = #{addresskey} ,
+	    </if>
+		<if test="startnum != null and startnum != '' " >
+		     startnum = #{startnum} ,
+	    </if>
+		<if test="endnum != null and endnum != '' " >
+		     endnum = #{endnum} ,
+	    </if>
+		<if test="single != null and single != '' " >
+		     single = #{single} ,
+	    </if>
+		<if test="position != null and position != '' " >
+		     position = #{position} ,
+	    </if>
+		<if test="regionId != null and regionId != '' " >
+		     region_id = #{regionId} ,
+	    </if>
+    </set>
+    where 
+     subarea_id = #{subareaId}
+  </update>
+ 
+ 
+ 
+ <!-- update修改语句 End-->
+<!-- ****************************************************************-->
+ <!-- delecte删除语句 Start-->
+ <delete id="deleteById" parameterType="java.util.Map" >
+      DELETE FROM subarea 
+      WHERE id = #{id}
+   </delete>
+ <!-- delecte删除语句 End-->
+</mapper>

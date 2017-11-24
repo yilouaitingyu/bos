@@ -21,5 +21,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="mapper/UserMapper.xml"/>
 		<mapper resource="mapper/StaffMapper.xml"/>
 		<mapper resource="mapper/RegionMapper.xml"/>
+		<mapper resource="mapper/SubareaMapper.xml"/>
+		<mapper resource="mapper/DecidedZoneMapper.xml"/>
 	</mappers>
 </configuration>
